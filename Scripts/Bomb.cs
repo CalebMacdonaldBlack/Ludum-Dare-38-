@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour {
 
+<<<<<<< HEAD
+	public Transform Target;
+=======
 	public GameObject Target;
+>>>>>>> c36899b635abb5e15222bc6b499c2726b439c593
 
 	// Use this for initialization
 	void Start () {
@@ -12,8 +16,13 @@ public class Bomb : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+<<<<<<< HEAD
+	void FixedUpdate () {
+		Vector3 vectorToTarget = Target.position - transform.position;
+=======
 	void Update () {
 		Vector3 vectorToTarget = Target.transform.position - transform.position;
+>>>>>>> c36899b635abb5e15222bc6b499c2726b439c593
 		float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
 		Quaternion q = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 		transform.rotation = q;
