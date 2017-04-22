@@ -7,7 +7,6 @@ public class planetForce : MonoBehaviour {
 		public float pullForce = 10;
 
 		public void FixedUpdate() {
-		Debug.Log (pullRadius);
 		foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, pullRadius)) {
 			
 			if (collider.tag != "Tile") {
