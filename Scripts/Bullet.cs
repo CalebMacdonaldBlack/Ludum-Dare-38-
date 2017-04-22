@@ -9,17 +9,17 @@ public class Bullet : MonoBehaviour {
 	void Start () {
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frasadfasdfasdfe
 	void Update () {
 		
 	}
 
-	void OnTriggerEnter2D(Collision2D collision)
+	void OnCollisionEnter2D(Collision2D collision)
 	{
 		Debug.Log ("TRGGERED");
-		if (collision.collider.tag == "Tile") {
+		if (collision.collider.tag == "Tile" || collision.collider.tag == "Bomb") {
 			Destroy (collision.collider.gameObject);
+			Destroy (this.gameObject);
 		}
-		Destroy (this.gameObject);
 	}
 }
