@@ -8,10 +8,15 @@ public class planetForce : MonoBehaviour {
 
 		public void FixedUpdate() {
 		foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, pullRadius)) {
-			
-			if (collider.tag != "Tile") {
-				Vector2 forceDirection = transform.position - collider.transform.position;
-				collider.GetComponent<Rigidbody2D>().AddForce(forceDirection.normalized * pullForce * Time.fixedDeltaTime);
+			Vector2 forceDirection = transform.position - collider.transform.position;
+			switch (collider.tag) {
+			case "Bomb":
+				collider.GetComponent<Rigidbody2D> ().AddForce (forceDirection.normalized * pullForce / 40 * Time.fixedDeltaTime);
+				break;
+
+			case "Player":
+				collider.GetComponent<Rigidbody2D> ().AddForce (forceDirection.normalized * pullForce * Time.fixedDeltaTime);
+				break;
 			}
 		}
 	}
