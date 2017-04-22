@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour {
 
 	public GameObject Target;
+	public AudioSource planetdie;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +26,14 @@ public class Bomb : MonoBehaviour {
 		Debug.Log ("BOOM BITCHES");
 		foreach (ContactPoint2D contact in collision.contacts)
 		{
+			bool played = false;
 			foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, 4)) {
 
 				if (collider.tag == "Tile") {
+					if (!played) {
+						Instantiate (planetdie);
+						played = true;
+					}
 					Destroy (collider.gameObject);
 				}
 			}

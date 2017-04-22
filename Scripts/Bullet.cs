@@ -6,13 +6,17 @@ using UnityEngine.UI;
 
 public class Bullet : MonoBehaviour {
 	public static int score = 0;
+	public AudioSource bugdie;
 	// Use this for initialization
 	void Start () {
 	}
 	
 	// Update is called once per frasadfasdfasdfe
 	void Update () {
-		
+		if (transform.position.x > 300 || transform.position.x < -300 || transform.position.y > 300 || transform.position.y < -300) {
+			Destroy (this.gameObject);
+			Debug.Log ("WORKS");
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
@@ -22,6 +26,7 @@ public class Bullet : MonoBehaviour {
 			Destroy (collision.collider.gameObject);
 			Destroy (this.gameObject);
 			if (collision.collider.tag == "Bomb") {
+				Instantiate (bugdie);
 				score += 100;
 			}
 		}

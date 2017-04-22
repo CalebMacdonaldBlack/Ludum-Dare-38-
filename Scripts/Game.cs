@@ -24,7 +24,7 @@ public class Game : MonoBehaviour {
 				}
 			}
 		}
-
+		this.GetComponentInChildren<Animator> ();
 		radius = 100;
 		searchArea = radius * 3;
 		for (int x = 0; x < searchArea; x++) {
@@ -45,7 +45,7 @@ public class Game : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (period > 1)
+		if (period > 3)
 		{
 			Instantiate (bomb, RandomSpawnLocations[Random.Range (0, RandomSpawnLocations.Count - 1)], bomb.transform.rotation);
 			Debug.Log("Tick");	
