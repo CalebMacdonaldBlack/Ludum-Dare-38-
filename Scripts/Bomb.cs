@@ -28,6 +28,12 @@ public class Bomb : MonoBehaviour {
 			bool played = false;
 			foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, 4)) {
 
+				if (collider.tag == "World") {
+					GameObject world = GameObject.FindGameObjectsWithTag ("World")[0];
+					Instantiate (planetdie);
+					world.transform.localScale -= new Vector3 (0.4f, 0.4f, 0.0f);
+				}
+
 				if (collider.tag == "Tile") {
 					if (!played) {
 						Instantiate (planetdie);
