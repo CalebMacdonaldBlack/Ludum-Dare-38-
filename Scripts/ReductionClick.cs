@@ -13,6 +13,8 @@ public class ReductionClick : MonoBehaviour {
 
 	void TaskOnClick()
 	{
+
+		Bullet.score = 0;
 		Debug.Log("Play Clicked");
 		Application.LoadLevel("smallWorld");
 	}
