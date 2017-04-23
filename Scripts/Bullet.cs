@@ -15,13 +15,11 @@ public class Bullet : MonoBehaviour {
 	void Update () {
 		if (transform.position.x > 300 || transform.position.x < -300 || transform.position.y > 300 || transform.position.y < -300) {
 			Destroy (this.gameObject);
-			Debug.Log ("WORKS");
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log ("TRGGERED");
 		if (collision.collider.tag == "Tile" || collision.collider.tag == "Bomb") {
 			Destroy (collision.collider.gameObject);
 			Destroy (this.gameObject);
@@ -34,6 +32,5 @@ public class Bullet : MonoBehaviour {
 
 	void OnGUI(){
 		GUI.Label (new Rect(20,20,100,100), "Score: " + score);
-		//Alternatively use
 	}
 }

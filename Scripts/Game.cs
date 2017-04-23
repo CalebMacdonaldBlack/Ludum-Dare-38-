@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Game : MonoBehaviour {
 	public GameObject tile;
@@ -8,11 +9,11 @@ public class Game : MonoBehaviour {
 	public int radius;
 	public float period = 0.0f;
 	private List<Vector3> RandomSpawnLocations = new List<Vector3> ();
+	public static int originalTileCount = 0;
+	public static bool gameover = false;
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("GAME STARTED BITCHES");
-
 		int searchArea = radius * 3;
 		for (int x = 0; x < searchArea; x++) {
 			for (int y = 0; y < searchArea; y++) {
@@ -41,16 +42,25 @@ public class Game : MonoBehaviour {
 				}
 			}
 		}
+		originalTileCount = GameObject.FindGameObjectsWithTag("Tile").Length;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (period > 3)
+		if (period > 1.5 - Bullet.score / 10000 && !gameover)
 		{
 			Instantiate (bomb, RandomSpawnLocations[Random.Range (0, RandomSpawnLocations.Count - 1)], bomb.transform.rotation);
-			Debug.Log("Tick");	
 			period = 0;
 		}
 		period += UnityEngine.Time.deltaTime;
+
+		if (GameObject.FindGameObjectsWithTag ("Tile").Length < originalTileCount * 0.1 && !gameover) {
+			Debug.Log ("GAME OVER");
+			gameover = true;
+			Destroy (GameObject.FindGameObjectsWithTag ("Music") [0]);
+			GameObject.FindGameObjectsWithTag ("Tile").ToList ().ForEach (x => Destroy (x));
+			GameObject.FindGameObjectsWithTag ("Bomb").ToList ().ForEach (x => Destroy (x));
+			GameObject.FindGameObjectsWithTag ("Bullet").ToList ().ForEach (x => Destroy (x));
+		}
 	}
 }

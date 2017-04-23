@@ -23,7 +23,6 @@ public class Bomb : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log ("BOOM BITCHES");
 		foreach (ContactPoint2D contact in collision.contacts)
 		{
 			bool played = false;
