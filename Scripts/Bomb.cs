@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour {
 
 	public GameObject Target;
 	public AudioSource planetdie;
+	public GameObject animation;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,7 @@ public class Bomb : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
+		Instantiate (animation, transform.position, transform.rotation);
 		foreach (ContactPoint2D contact in collision.contacts)
 		{
 			bool played = false;
