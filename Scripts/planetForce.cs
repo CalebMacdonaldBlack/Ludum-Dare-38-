@@ -11,7 +11,7 @@ public class planetForce : MonoBehaviour {
 			Vector2 forceDirection = transform.position - collider.transform.position;
 			switch (collider.tag) {
 			case "Bomb":
-				collider.GetComponent<Rigidbody2D> ().AddForce (forceDirection.normalized * pullForce / 100 * Time.fixedDeltaTime);
+				collider.GetComponent<Rigidbody2D> ().AddForce (forceDirection.normalized * pullForce / 40 * Time.fixedDeltaTime);
 				break;
 
 			case "Player":

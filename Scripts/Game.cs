@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
+using System.Threading;
 
 public class Game : MonoBehaviour {
 	public GameObject tile;
@@ -11,6 +13,7 @@ public class Game : MonoBehaviour {
 	private List<Vector3> RandomSpawnLocations = new List<Vector3> ();
 	public static int originalTileCount = 0;
 	public static bool gameover = false;
+	public Canvas GameOverCanvas;
 
 	// Use this for initialization
 	void Start () {
@@ -56,11 +59,18 @@ public class Game : MonoBehaviour {
 
 		if (GameObject.FindGameObjectsWithTag ("Tile").Length < originalTileCount * 0.1 && !gameover) {
 			Debug.Log ("GAME OVER");
+			GameOverCanvas.GetComponent<Text>().text = "Game Over\nScore: " + Bullet.score;
+			Instantiate (GameOverCanvas);
 			gameover = true;
 			Destroy (GameObject.FindGameObjectsWithTag ("Music") [0]);
 			GameObject.FindGameObjectsWithTag ("Tile").ToList ().ForEach (x => Destroy (x));
 			GameObject.FindGameObjectsWithTag ("Bomb").ToList ().ForEach (x => Destroy (x));
 			GameObject.FindGameObjectsWithTag ("Bullet").ToList ().ForEach (x => Destroy (x));
+			Invoke( "LoadMenu", 5.0f );
 		}
+	}
+
+	void LoadMenu() {
+		Application.LoadLevel ("Menu");
 	}
 }
