@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Bullet : MonoBehaviour {
 	public static int score = 0;
 	public AudioSource bugdie;
+	public Canvas scoreClone;
 	// Use this for initialization
 	void Start () {
 	}
@@ -26,11 +27,11 @@ public class Bullet : MonoBehaviour {
 			if (collision.collider.tag == "Bomb") {
 				Instantiate (bugdie);
 				score += 100;
+				GameObject oldScore = GameObject.FindGameObjectsWithTag ("Score") [0];
+				Destroy (oldScore);
+				scoreClone.GetComponent<Text> ().text = "Score: " + score;
+				Instantiate (scoreClone);
 			}
 		}
-	}
-
-	void OnGUI(){
-		GUI.Label (new Rect(20,20,100,100), "Score: " + score);
 	}
 }
